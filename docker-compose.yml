@@ -188,7 +188,7 @@ services:
         reservations:
           memory: 64M
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://localhost:9300"]
       interval: 5s
       timeout: 1s
       retries: 5
