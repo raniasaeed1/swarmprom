@@ -3,7 +3,7 @@ groups:
   rules:
   - alert: node_cpu_usage
     expr: 100 - (avg(irate(node_cpu_seconds_total{mode="idle"}[1m]) * ON(instance) GROUP_LEFT(node_name)
-      node_meta * 100) BY (node_name)) > 50
+      node_meta * 100) BY (node_name)) > 1
     for: 1m
     labels:
       severity: warning
@@ -13,7 +13,7 @@ groups:
       summary: CPU alert for Swarm node '{{ $labels.node_name }}'
   - alert: node_memory_usage
     expr: sum(((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes)
-      * ON(instance) GROUP_LEFT(node_name) node_meta * 100) BY (node_name) > 80
+      * ON(instance) GROUP_LEFT(node_name) node_meta * 100) BY (node_name) > 1
     for: 1m
     labels:
       severity: warning
@@ -24,7 +24,7 @@ groups:
   - alert: node_disk_usage
     expr: ((node_filesystem_size_bytes{mountpoint="/rootfs"} - node_filesystem_free_bytes{mountpoint="/rootfs"})
       * 100 / node_filesystem_size_bytes{mountpoint="/rootfs"}) * ON(instance) GROUP_LEFT(node_name)
-      node_meta > 85
+      node_meta > 1
     for: 1m
     labels:
       severity: warning
