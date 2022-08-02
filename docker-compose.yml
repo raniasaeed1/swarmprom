@@ -26,7 +26,7 @@ services:
     networks:
       - net
     environment:
-      - DOCKER_GWBRIDGE_IP=172.18.0.1
+      - DOCKER_GWBRIDGE_IP=172.26.0.1
     configs:
       - source: dockerd_config
         target: /etc/caddy/Caddyfile
@@ -58,7 +58,7 @@ services:
           memory: 64M
 
   grafana:
-    image: stefanprodan/swarmprom-grafana:5.3.4
+    image: stefanprodan/swarmprom-grafana
     networks:
       - net
     environment:
@@ -87,7 +87,7 @@ services:
           memory: 64M
 
   alertmanager:
-    image: stefanprodan/swarmprom-alertmanager:v0.14.0
+    image: stefanprodan/swarmprom-alertmanager
     networks:
       - net
     environment:
@@ -112,7 +112,7 @@ services:
           memory: 64M
 
   unsee:
-    image: cloudflare/unsee:v0.8.0
+    image: cloudflare/unsee
     networks:
       - net
     environment:
@@ -176,7 +176,7 @@ services:
   caddy:
     image: stefanprodan/caddy
     ports:
-      - "3000:3000"
+      - "9300:3000"
       - "9090:9090"
       - "9093:9093"
       - "9094:9094"
