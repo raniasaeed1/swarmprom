@@ -26,7 +26,7 @@ services:
     networks:
       - net
     environment:
-      - DOCKER_GWBRIDGE_IP=172.26.0.1
+      - DOCKER_GWBRIDGE_IP=172.18.0.1
     configs:
       - source: dockerd_config
         target: /etc/caddy/Caddyfile
@@ -58,7 +58,7 @@ services:
           memory: 64M
 
   grafana:
-    image: stefanprodan/swarmprom-grafana
+    image: registry.local.com:5000/grafana
     networks:
       - net
     environment:
@@ -91,9 +91,9 @@ services:
     networks:
       - net
     environment:
-      - SLACK_URL=${SLACK_URL:-https://hooks.slack.com/services/TOKEN}
-      - SLACK_CHANNEL=${SLACK_CHANNEL:-general}
-      - SLACK_USER=${SLACK_USER:-alertmanager}
+      - SLACK_URL=${SLACK_URL:-https://hooks.slack.com/services/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}
+      - SLACK_CHANNEL=${SLACK_CHANNEL:-alerts}
+      - SLACK_USER=${SLACK_USER:-promethus-alerts}
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
@@ -112,7 +112,7 @@ services:
           memory: 64M
 
   node-exporter:
-    image: stefanprodan/swarmprom-node-exporter:v0.16.0
+    image: registry.local.com:5000/node-exporter
     networks:
       - net
     environment:
@@ -137,7 +137,7 @@ services:
           memory: 64M
 
   prometheus:
-    image: stefanprodan/swarmprom-prometheus:v2.5.0
+    image: registry.local.com:5000/prometheus
     networks:
       - net
     command:
@@ -168,8 +168,6 @@ services:
     ports:
       - "9300:3000"
       - "9090:9090"
-      - "9093:9093"
-      - "9094:9094"
     networks:
       - net
     environment:
