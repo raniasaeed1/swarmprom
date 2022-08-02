@@ -92,7 +92,7 @@ services:
       - net
     environment:
       - SLACK_URL=${SLACK_URL:-https://hooks.slack.com/services/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}
-      - SLACK_CHANNEL=${SLACK_CHANNEL:-#alerts}
+      - SLACK_CHANNEL=${SLACK_CHANNEL:-#alert}
       - SLACK_USER=${SLACK_USER:-promethus-alerts}
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
