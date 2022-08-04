@@ -8,8 +8,19 @@
     tls off
 }
 
+:9093 {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / alertmanager:9093 {
+            transparent
+        }
 
-:3000 {
+    errors stderr
+    tls off
+}
+
+
+
+:9300 {
     proxy / grafana:3000 {
             transparent
             websocket
@@ -18,4 +29,3 @@
     errors stderr
     tls off
 }
-
