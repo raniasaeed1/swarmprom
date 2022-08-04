@@ -59,6 +59,8 @@ services:
 
   grafana:
     image: registry.local.com:5000/grafana
+    ports:
+      - "9090:9090"
     networks:
       - net
     environment:
@@ -166,7 +168,6 @@ services:
   caddy:
     image: stefanprodan/caddy
     ports:
-      - "9300:3000"
       - "9090:9090"
     networks:
       - net
@@ -187,8 +188,3 @@ services:
           memory: 128M
         reservations:
           memory: 64M
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9300"]
-      interval: 5s
-      timeout: 1s
-      retries: 5
